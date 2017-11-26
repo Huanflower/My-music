@@ -6,7 +6,7 @@ const express = require('express');
 let app = express();
 // 3:开启服务器监听端口
 app.listen(config.web_port,config.web_host,()=>{
-    console.log('34期服务器启动在9999端口');
+    console.log('---------------很高兴为你服务，服务器启动在9999端口');
 });
 //引入处理post请求体对象
 const bodyParser = require('body-parser');

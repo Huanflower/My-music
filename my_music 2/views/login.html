@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>传智音乐</title>
-    {{include './particals/links.html' }}
+     {{include './particals/links.html'}}
 </head>
 
 <body>
@@ -45,42 +45,34 @@
             </div>
         </div>
     </div>
-{{include './particals/footer.html'}}
+     {{include './particals/footer.html'}}
 
-
-    <script type="text/javascript">
-        // 表单提交事件
-        $('#login_form').on('submit',function(e){
-            //禁止默认事件
+     <script type="text/javascript">
+        //表单提交事件
+         $('#login_form').on('submit',function(e){
+             //禁止默认事件
             e.preventDefault();
             //获取表单内的数据
-            var data = $(this).serialize(); //请求体
-            //请求头默认
-            //请求行
+            var data = $(this).serialize();//请求体
             var url = '/api/do-login';
-            //发请求
             $.ajax({
-                type:'post',
-                url:url,
-                data:data,
-                dataType:'json',
-                success:function(data){
+                type: 'post',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function(data){
                     if(data.code == '001'){
-                       if(confirm('登录成功,去首页听歌?^_^')){
-                             //页面跳转
-                            location.href = '/music/list-music';  
-                       }
-                       return;
+                        if(confirm('登录成功，去首页听歌不？')){
+                            // 页面跳转
+                            location.href='/music/list-music';
+                        }
+                        return;
                     }
                     $('#msg').text(data.msg);
                 }
             })
-        });
-
-
-    </script>
-
-
+         })
+     </script>
 </body>
 
 </html>
