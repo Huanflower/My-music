@@ -8,27 +8,32 @@
     <style type="text/css">
         #box {
             background-color: rgba(0, 0, 0, 0.2);
+            /* background: url(../public/img/123.jpg); */
             width: 300px;
             height: 360px;
             margin-top: 10px;
             overflow: hidden;
             padding: 0;
         }
-
+        
         #box p {
+            width: 100%;
             padding: 0 15px;
         }
-
+        
         #lrc {
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
             margin-top: 130px;
             position: absolute;
             text-align: center;
             padding-top: 60px;
         }
-
+        
         .gl {
-            color: hotpink;
-            background-color: red;
+            color: red;
+            background-color: rgba(31, 95, 214, 0.6);
         }
     </style>
 </head>
@@ -106,9 +111,9 @@
                 if (!result) continue;
                 //统计时间作为对象的key,歌词作为对象的value
                 // 1:"00"2:"00"3:"98"4:"告白气球"
-                var minute = (result[1] - 0) * 60;//分
-                var second = result[2] - 0;//秒
-                var hs = Math.round(result[3] / 100);//毫秒
+                var minute = (result[1] - 0) * 60; //分
+                var second = result[2] - 0; //秒
+                var hs = Math.round(result[3] / 100); //毫秒
                 var time = minute + second + hs;
                 obj[time] = result[4];
             }
@@ -125,7 +130,7 @@
         }
         //滚动
         function scroll(lrcObj) {
-            $('#audio').on('timeupdate', function (e) {
+            $('#audio').on('timeupdate', function(e) {
                 //四舍五入秒，更容易匹配上对象，能发生滚动
                 var jumpPoint = Math.round(e.target.currentTime);
                 //判断能否滚动
@@ -135,13 +140,13 @@
                 var minusHeight = $('#lrc').offset().top - p.offset().top;
                 p.addClass('gl').siblings().removeClass('gl');
                 $('#lrc').animate({
-                    top: minusHeight//负数向上更多
+                    top: minusHeight //负数向上更多
                 }, 'slow');
 
             });
         }
         // 给所有的span标签添加点击事件
-        $('.ply').on('click', function () {
+        $('.ply').on('click', function() {
             var $span = $(this);
             var file = $span.attr('file');
             var filelrc = $span.attr('filelrc');
@@ -151,7 +156,7 @@
             $.ajax({
                 url: filelrc,
                 type: 'get',
-                success: function (str) {
+                success: function(str) {
                     //解析歌词对象    
                     var lrcObj = parseObj(str);
                     //歌词对象生成DOM
@@ -168,7 +173,7 @@
 
 
         //异步无刷新删除
-        $('.del').on('click', function (e) {
+        $('.del').on('click', function(e) {
             e.preventDefault();
             var url = $(this).attr('href');
             var aTag = this;
@@ -181,7 +186,7 @@
                     url: url,
                     type: 'delete',
                     dataType: 'json',
-                    success: function (data) {
+                    success: function(data) {
                         if (data.code == '001') {
                             //删除成功，删除一个DOM
                             var tr = aTag.parentNode.parentNode;
